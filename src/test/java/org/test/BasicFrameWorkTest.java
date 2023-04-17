@@ -1,5 +1,4 @@
 package org.test;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.core.Core;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,31 +25,29 @@ public class BasicFrameWorkTest {
     private static final String CSS_I_AGREE_CONDITIONS_CREATE_ACCOUNT_LOCATOR = "input[name='i_agree']";
     private static final String CSS_REGISTER_BUTTON_CREATE_ACCOUNT_LOCATOR = "#register_btnundefined";
 
-    private static final String CSS_ALREADY_REGISTERED_MSG_CREATE_ACCOUNT_LOCATOR = "label[class='center block smollMargin invalid']";
+    private static final String CSS_ALREADY_REGISTERED_MSG_CREATE_ACCOUNT_LOCATOR = "CSS:label[class='invalid center block smollMargin']";
     private static final String CSS_ALREADY_REGISTERED_HIDDEN_MSG_CREATE_ACCOUNT_LOCATOR = "label[class='center block smollMargin']";
 
 
     WebDriver driver;
-    Core core = new Core();
+    Core letsAutomate = new Core();
     @BeforeEach
     void setup() {
-        driver = core.launchSite(DEFAULT_BROWSER, BASE_URL);
+        driver = letsAutomate.launchSite(DEFAULT_BROWSER, BASE_URL);
     }
 
     @Test
     void test() throws InterruptedException {
-        core.doClick("CSS", CSS_MENU_USER_ICON_LOCATOR);
-        core.doClick("xpath", XPATH_CREATE_NEW_ACCOUNT_LINK_SING_IN_LOCATOR);
-        core.fillInputText(driver, "CSS", CSS_USERNAME_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_USER_NAME);
-        core.fillInputText(driver, "CSS", CSS_EMAIL_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_EMAIL);
-        core.fillInputText(driver, "xpath", XPATH_PASSWORD_INPUT_CREATE_ACCOUNT_LOCATOR, GENERIC_PASSWORD);
-        core.fillInputText(driver, "xpath", XPATH_CONFIRM_PASSWORD_INPUT_CREATE_ACCOUNT_LOCATOR, GENERIC_PASSWORD);
-        core.doClick("CSS", CSS_I_AGREE_CONDITIONS_CREATE_ACCOUNT_LOCATOR);
-        core.doClick("CSS", CSS_REGISTER_BUTTON_CREATE_ACCOUNT_LOCATOR);
-        core.wasteSomeTime(2);
-        core.doClick("CSS", CSS_REGISTER_BUTTON_CREATE_ACCOUNT_LOCATOR);
-        core.wasteSomeTime(.5);
-        System.out.println(core.getTextFromElement("CSS", CSS_ALREADY_REGISTERED_MSG_CREATE_ACCOUNT_LOCATOR));
+        letsAutomate.doClick("CSS", CSS_MENU_USER_ICON_LOCATOR);
+        letsAutomate.doClick("xpath", XPATH_CREATE_NEW_ACCOUNT_LINK_SING_IN_LOCATOR);
+        letsAutomate.fillInputText(driver, "CSS", CSS_USERNAME_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_USER_NAME);
+        letsAutomate.fillInputText(driver, "CSS", CSS_EMAIL_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_EMAIL);
+        letsAutomate.fillInputText(driver, "xpath", XPATH_PASSWORD_INPUT_CREATE_ACCOUNT_LOCATOR, GENERIC_PASSWORD);
+        letsAutomate.fillInputText(driver, "xpath", XPATH_CONFIRM_PASSWORD_INPUT_CREATE_ACCOUNT_LOCATOR, GENERIC_PASSWORD);
+        letsAutomate.doClick("CSS", CSS_I_AGREE_CONDITIONS_CREATE_ACCOUNT_LOCATOR);
+        letsAutomate.doClick("CSS", CSS_REGISTER_BUTTON_CREATE_ACCOUNT_LOCATOR);
+        letsAutomate.wasteSomeTime(1);
+        System.out.println(letsAutomate.getTextFromElement( CSS_ALREADY_REGISTERED_MSG_CREATE_ACCOUNT_LOCATOR));
 
     }
 }

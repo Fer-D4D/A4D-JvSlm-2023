@@ -2,10 +2,9 @@ package org.core;
 
 import com.beust.ah.A;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -47,6 +46,27 @@ public class Core {
         element = driver.findElement(By.xpath(locatorDefinition));
         move2TargetElement(element);
         return element;
+    }
+
+    public WebElement getElement(WebDriver driver, String locatorDefinition){
+        try {
+            WebElement element;
+            if (locatorDefinition.toLowerCase().contains("css:")) {
+                element = driver.findElement(By.cssSelector(StringUtils.replaceIgnoreCase(locatorDefinition, "CSS:", "")));
+                move2TargetElement(element);
+                return element;
+            }
+            if (locatorDefinition.toLowerCase().contains("id:")) {
+                element = driver.findElement(By.cssSelector(StringUtils.replaceIgnoreCase(locatorDefinition, "ID:", "#")));
+                move2TargetElement(element);
+                return element;
+            }
+            element = driver.findElement(By.xpath(StringUtils.replaceIgnoreCase(locatorDefinition, "XPATH:", "")));
+            move2TargetElement(element);
+            return element;
+        }catch (NoSuchElementException e){
+            return null;
+        }
     }
 
     public void move2TargetElement(WebElement element){
@@ -97,9 +117,12 @@ public class Core {
     }
 
 
-    public String getTextFromElement(String locatorType, String locatorDefinition) throws InterruptedException {
+    public String getTextFromElement( String locatorDefinition) throws InterruptedException {
         wasteSomeTime(.5);
-        return this.getElement(driver, locatorType, locatorDefinition).getText();
+        WebElement element = this.getElement(driver, locatorDefinition);
+        if(element != null)
+            return element.getText();
+        return "Element not found, nothing to show here :P";
     }
 
 }
