@@ -77,21 +77,36 @@ public class Core {
 
     public boolean fillInputText(WebDriver driver, String locatorType, String locatorDefinition, String text2fill){
         WebElement webElement = this.getElement(driver, locatorType, locatorDefinition);
-        if(this.elementReady2BeClickable(driver,webElement)){
+        if(this.elementReady2BeClickable(webElement)){
             webElement.sendKeys(text2fill);
             return true;
         }
         return false;
     }
 
-    public void fillInputText(WebElement element,  String text2fill){
-       element.sendKeys(text2fill);
+    public boolean fillInputText(String locatorDefinition,  String text2fill){
+        WebElement webElement = this.getElement(driver, locatorDefinition);
+        if(this.elementReady2BeClickable(webElement)){
+            webElement.sendKeys(text2fill);
+            return true;
+        }
+        return false;
     }
 
     public boolean doClick( String locatorType, String locatorDefinition) throws InterruptedException {
         WebElement webElement = this.getElement(driver, locatorType, locatorDefinition);
         wasteSomeTime();
-        if(this.elementReady2BeClickable(driver,webElement)){
+        if(this.elementReady2BeClickable(webElement)){
+            webElement.click();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean doClick( String locatorDefinition) throws InterruptedException {
+        WebElement webElement = this.getElement(driver, locatorDefinition);
+        //wasteSomeTime();
+        if(this.elementReady2BeClickable(webElement)){
             webElement.click();
             return true;
         }
@@ -106,7 +121,7 @@ public class Core {
         Thread.sleep((long) (wastedTime*1000));
     }
 
-    public boolean elementReady2BeClickable(WebDriver driver, WebElement element) {
+    public boolean elementReady2BeClickable(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIME_2_WAIT));
         try{
             wait.until(ExpectedConditions.elementToBeClickable(element));

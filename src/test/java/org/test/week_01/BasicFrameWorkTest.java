@@ -1,4 +1,4 @@
-package org.test;
+package org.test.week_01;
 import org.core.Core;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,12 +14,12 @@ public class BasicFrameWorkTest {
     private static final String GENERIC_PASSWORD = "aaBB22";
 
     //Test Web Elements
-    private static final String CSS_MENU_USER_ICON_LOCATOR = "#menuUser";
+    private static final String MENU_USER_ICON_LOCATOR = "ID:menuUser";
     private static final String XPATH_USERNAME_INPUT_SING_IN_LOCATOR = "//*/input[@name='username']";
     private static final String XPATH_PASSWORD_INPUT_SING_IN_LOCATOR = "//*/input[@name='password']";
-    private static final String XPATH_CREATE_NEW_ACCOUNT_LINK_SING_IN_LOCATOR = "//*/a[contains(., 'CREATE NEW ACCOUNT')]";
+    private static final String CREATE_NEW_ACCOUNT_LINK_SING_IN_LOCATOR = "XPATH://*/a[contains(., 'CREATE NEW ACCOUNT')]";
     private static final String CSS_USERNAME_INPUT_CREATE_ACCOUNT_LOCATOR = "input[name='usernameRegisterPage']";
-    private static final String CSS_EMAIL_INPUT_CREATE_ACCOUNT_LOCATOR = "input[name='emailRegisterPage']";
+    private static final String EMAIL_INPUT_CREATE_ACCOUNT_LOCATOR = "CSS:input[name='emailRegisterPage']";
     private static final String XPATH_PASSWORD_INPUT_CREATE_ACCOUNT_LOCATOR = "//*/input[@name='passwordRegisterPage']";
     private static final String XPATH_CONFIRM_PASSWORD_INPUT_CREATE_ACCOUNT_LOCATOR = "//*/input[@name='confirm_passwordRegisterPage']";
     private static final String CSS_I_AGREE_CONDITIONS_CREATE_ACCOUNT_LOCATOR = "input[name='i_agree']";
@@ -38,10 +38,13 @@ public class BasicFrameWorkTest {
 
     @Test
     void test() throws InterruptedException {
-        letsAutomate.doClick("CSS", CSS_MENU_USER_ICON_LOCATOR);
-        letsAutomate.doClick("xpath", XPATH_CREATE_NEW_ACCOUNT_LINK_SING_IN_LOCATOR);
+        letsAutomate.doClick(MENU_USER_ICON_LOCATOR);
+        letsAutomate.doClick(CREATE_NEW_ACCOUNT_LINK_SING_IN_LOCATOR);
+
         letsAutomate.fillInputText(driver, "CSS", CSS_USERNAME_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_USER_NAME);
-        letsAutomate.fillInputText(driver, "CSS", CSS_EMAIL_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_EMAIL);
+
+        letsAutomate.fillInputText(EMAIL_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_EMAIL);
+
         letsAutomate.fillInputText(driver, "xpath", XPATH_PASSWORD_INPUT_CREATE_ACCOUNT_LOCATOR, GENERIC_PASSWORD);
         letsAutomate.fillInputText(driver, "xpath", XPATH_CONFIRM_PASSWORD_INPUT_CREATE_ACCOUNT_LOCATOR, GENERIC_PASSWORD);
         letsAutomate.doClick("CSS", CSS_I_AGREE_CONDITIONS_CREATE_ACCOUNT_LOCATOR);
