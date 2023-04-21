@@ -3,7 +3,7 @@ import org.core.Core;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class KeepItEasy {
+public class KeepItEasyTest {
 
     //test data
     private static final String BASE_URL = "https://duckduckgo.com/";
@@ -28,5 +28,6 @@ public class KeepItEasy {
     @Test
     void test() throws InterruptedException {
     letsAutomate.fillInputText(XPATH_SEARCH_INPUT_TEXT, TEXT_2_SEARCH);
+    letsAutomate.doClick(SEARCH_BUTTON);
     }
 }

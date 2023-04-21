@@ -40,7 +40,7 @@ public class BasicFrameWorkTest {
     void test() throws InterruptedException {
         letsAutomate.doClick(MENU_USER_ICON_LOCATOR);
         letsAutomate.doClick(CREATE_NEW_ACCOUNT_LINK_SING_IN_LOCATOR);
-
+        letsAutomate.wasteSomeTime(2);
         letsAutomate.fillInputText(driver, "CSS", CSS_USERNAME_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_USER_NAME);
 
         letsAutomate.fillInputText(EMAIL_INPUT_CREATE_ACCOUNT_LOCATOR, TEST_EMAIL);
